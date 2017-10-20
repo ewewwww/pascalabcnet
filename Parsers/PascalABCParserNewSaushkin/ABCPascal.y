@@ -33,7 +33,7 @@
 
 %token <ti> tkDirectiveName tkAmpersend tkColon tkDotDot tkPoint tkRoundOpen tkRoundClose tkSemiColon tkSquareOpen tkSquareClose tkQuestion tkQuestionPoint tkDoubleQuestion tkQuestionSquareOpen
 %token <ti> tkSizeOf tkTypeOf tkWhere tkArray tkCase tkClass tkAuto tkConst tkConstructor tkDestructor tkElse  tkExcept tkFile tkFor tkForeach tkFunction 
-%token <ti> tkIf tkImplementation tkInherited tkInterface tkProcedure tkOperator tkProperty tkRaise tkRecord tkSet tkType tkThen tkUses tkVar tkWhile tkWith tkNil 
+%token <ti> tkIf tkImplementation tkInherited tkInterface tkTypeclass tkInstance tkProcedure tkOperator tkProperty tkRaise tkRecord tkSet tkType tkThen tkUses tkVar tkWhile tkWith tkNil 
 %token <ti> tkGoto tkOf tkLabel tkLock tkProgram tkEvent tkDefault tkTemplate tkPacked tkExports tkResourceString tkThreadvar tkSealed tkPartial tkTo tkDownto
 %token <ti> tkLoop 
 %token <ti> tkSequence tkYield
@@ -92,7 +92,7 @@
 %type <stn> goto_stmt 
 %type <id> func_name_ident param_name const_field_name func_name_with_template_args identifier_or_keyword unit_name exception_variable const_name func_meth_name_ident label_name type_decl_identifier template_identifier_with_equal 
 %type <id> program_param identifier identifier_keyword_operatorname func_class_name_ident optional_identifier visibility_specifier 
-%type <id> property_specifier_directives non_reserved 
+%type <id> property_specifier_directives non_reserved typeclass_restriction
 %type <stn> if_stmt   
 %type <stn> initialization_part  
 %type <stn> template_arguments label_list ident_or_keyword_pointseparator_list ident_list  param_name_list  
@@ -1058,7 +1058,22 @@ simple_type_decl
         { 
 			$$ = new type_declaration($1, $2, @$); 
 		}
+	| typeclass_restriction tkEqual tkTypeclass optional_base_classes optional_component_list_seq_end tkSemiColon
+		{
+			$$ = new typeclass_declaration($1 as typeclass_restriction, $4, $5 as class_body_list, @$);
+		}
+	| typeclass_restriction tkEqual tkInstance optional_component_list_seq_end tkSemiColon
+		{
+			$$ = new instance_declaration($1 as typeclass_restriction, $4 as class_body_list, @$);
+		}
     ;
+
+typeclass_restriction
+	: simple_type_identifier tkSquareOpen type_ref tkSquareClose
+		{
+			$$ = new typeclass_restriction($1, $3, @$);
+		}
+	;
 
 type_decl_identifier
     : identifier
@@ -1521,6 +1536,10 @@ where_part
     : tkWhere ident_list tkColon type_ref_and_secific_list tkSemiColon
         { 
 			$$ = new where_definition($2 as ident_list, $4 as where_type_specificator_list, @$); 
+		}
+	| tkWhere typeclass_restriction tkSemiColon
+		{
+			$$ = $1;
 		}
     ;
 
