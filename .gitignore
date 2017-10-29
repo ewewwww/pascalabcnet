@@ -23,6 +23,8 @@ ReleaseGenerators/PABCRtl/*.pdb
 Parsers/PascalABCParserNewSaushkin/ABCPascal.lst
 ReleaseGenerators/RebuildStandartModules.exe
 TestSuite/CompilationSamples/ClientServer.pas
+TestSuite/CompilationSamples/GraphWPF.pas
+TestSuite/CompilationSamples/NumLibABC.pas
 TestSuite/CompilationSamples/PABCExtensions.pas
 TestSuite/CompilationSamples/PT4MakerNetX.pas
 TestSuite/CompilationSamples/Speech.pas
