@@ -3120,7 +3120,7 @@ begin
   while t<>typeof(Object) do
   begin
     meth := t.GetMethod('ToString',System.Reflection.BindingFlags.Public or
-                System.Reflection.BindingFlags.Instance or 
+                System.Reflection.BindingFlags.&Instance or 
                 System.Reflection.BindingFlags.DeclaredOnly,nil,new System.Type[0],nil);
     if meth<>nil then 
       break;
@@ -3204,8 +3204,8 @@ begin
       else 
         while t<>typeof(object) do
         begin
-          var ff := t.GetFields(System.Reflection.BindingFlags.Public or System.Reflection.BindingFlags.Instance or System.Reflection.BindingFlags.DeclaredOnly);
-          var pp := t.GetProperties(System.Reflection.BindingFlags.Public or System.Reflection.BindingFlags.Instance or System.Reflection.BindingFlags.DeclaredOnly);
+          var ff := t.GetFields(System.Reflection.BindingFlags.Public or System.Reflection.BindingFlags.&Instance or System.Reflection.BindingFlags.DeclaredOnly);
+          var pp := t.GetProperties(System.Reflection.BindingFlags.Public or System.Reflection.BindingFlags.&Instance or System.Reflection.BindingFlags.DeclaredOnly);
   
           for var i:=ff.Length-1 downto 0 do
             sb.Insert(1,StructuredObjectToString(ff[i].GetValue(o),n+1)+',');
@@ -10538,7 +10538,7 @@ begin
       begin
         variable.GetType.InvokeMember('$Init$',
         System.Reflection.BindingFlags.InvokeMethod or
-        System.Reflection.BindingFlags.Instance or
+        System.Reflection.BindingFlags.&Instance or
         System.Reflection.BindingFlags.Public, nil, variable, nil);
         result := variable;
       end;
