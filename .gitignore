@@ -1,4 +1,4 @@
-.vs
+﻿.vs
 
 */**/bin
 bin/Lib/*.pcu
@@ -20,6 +20,7 @@ ReleaseGenerators/PABCRtl/*.pdb
 
 **/obj
 
+Parsers/PascalABCParserNewSaushkin/ABCPascal.lst
 ReleaseGenerators/RebuildStandartModules.exe
 TestSuite/CompilationSamples/ClientServer.pas
 TestSuite/CompilationSamples/PABCExtensions.pas
@@ -34,3 +35,4 @@ bin/System.dll.txt
 bin/mscorlib.txt
 bin/pabcnetc.exe
 bin/pabcnetcclear.exe
+bin/log.txt
