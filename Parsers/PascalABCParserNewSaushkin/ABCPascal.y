@@ -1060,18 +1060,18 @@ simple_type_decl
 		}
 	| typeclass_restriction tkEqual tkTypeclass optional_base_classes optional_component_list_seq_end tkSemiColon
 		{
-			$$ = new typeclass_declaration($1 as typeclass_restriction, $4, $5 as class_body_list, @$);
+			$$ = new type_declaration($1 as typeclass_restriction, new typeclass_definition($4 as named_type_reference_list, $5 as class_body_list, @$), @$);
 		}
 	| typeclass_restriction tkEqual tkInstance optional_component_list_seq_end tkSemiColon
 		{
-			$$ = new instance_declaration($1 as typeclass_restriction, $4 as class_body_list, @$);
+			$$ = new type_declaration($1 as typeclass_restriction, new instance_definition($4 as class_body_list, @$), @$);
 		}
     ;
 
 typeclass_restriction
-	: simple_type_identifier tkSquareOpen type_ref tkSquareClose
+	: simple_type_identifier tkSquareOpen template_param_list tkSquareClose
 		{
-			$$ = new typeclass_restriction($1, $3, @$);
+			$$ = new typeclass_restriction(($1 as named_type_reference).ToString(), $3 as template_param_list, @$);
 		}
 	;
 
