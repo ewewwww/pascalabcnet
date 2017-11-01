@@ -38,3 +38,4 @@ bin/mscorlib.txt
 bin/pabcnetc.exe
 bin/pabcnetcclear.exe
 bin/log.txt
+bin/CompilerController.ini
