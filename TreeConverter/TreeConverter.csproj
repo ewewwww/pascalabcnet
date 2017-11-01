@@ -168,6 +168,9 @@
     <Compile Include="TreeConversion\SyntaxTreeVisitorNodes\Assign.cs" />
     <Compile Include="TreeConversion\SyntaxTreeVisitorNodes\Foreach.cs" />
     <Compile Include="TreeConversion\SyntaxTreeVisitorNodes\ForLoop.cs" />
+    <Compile Include="TreeConversion\SyntaxTreeVisitorNodes\InstanceDeclaration.cs" />
+    <Compile Include="TreeConversion\SyntaxTreeVisitorNodes\TypeclassDeclaration.cs" />
+    <Compile Include="TreeConversion\SyntaxTreeVisitorNodes\WhereTypeclassConstraint.cs" />
     <Compile Include="TreeConversion\syntax_tree_visitor.cs">
       <SubType>Code</SubType>
     </Compile>

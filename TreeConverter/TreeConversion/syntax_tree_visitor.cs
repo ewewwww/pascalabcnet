@@ -10623,6 +10623,10 @@ namespace PascalABCCompiler.TreeConverter
         {
             //bool is_template_synonym = false;
             //SyntaxTree.array_type at=_type_declaration.type_def as SyntaxTree.array_type;
+            if (VisitTypeclassDeclaration(_type_declaration))
+                return;
+            if (VisitInstanceDeclaration(_type_declaration))
+                return;
             template_class tc = null;
             SyntaxTree.template_type_name ttn = _type_declaration.type_name as SyntaxTree.template_type_name;
             SyntaxTree.class_definition cl_def = _type_declaration.type_def as SyntaxTree.class_definition;
@@ -11399,6 +11403,8 @@ namespace PascalABCCompiler.TreeConverter
             List<common_type_node> used_types = new List<common_type_node>(where_list.defs.Count);
             foreach (SyntaxTree.where_definition wd in where_list.defs)
             {
+                if (VisitWhereTypeclassConstraint(wd))
+                    continue;
                 bool param_not_found = true;
                 foreach (common_type_node param in gparams)
                 {
