@@ -11,7 +11,7 @@ namespace PascalABCCompiler.TreeConverter
     {
 
 
-        
+        /*
         Dictionary<string, Dictionary<string, type_declaration>> instances = new Dictionary<string, Dictionary<string, type_declaration>>();
 
 
@@ -45,6 +45,6 @@ namespace PascalABCCompiler.TreeConverter
             }
             
             return true;
-        }
+        }*/
     }
 }

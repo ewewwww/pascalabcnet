@@ -54,6 +54,10 @@
     <Compile Include="SugarVisitors\QuestionPointDesugarVisitor.cs" />
     <Compile Include="SugarVisitors\SliceDesugarVisitor.cs" />
     <Compile Include="SugarVisitors\TupleVisitor.cs" />
+    <Compile Include="TypeclassVisitors\CollectInstancesVisitor.cs" />
+    <Compile Include="TypeclassVisitors\CollectRestrictedFunctionsVisitor.cs" />
+    <Compile Include="TypeclassVisitors\CollectTypeclassesVisitor.cs" />
+    <Compile Include="TypeclassVisitors\RemoveTypeclassesAndInstances.cs" />
     <Compile Include="YieldVisitors\ObjectCopier\ObjectCopier.cs" />
     <Compile Include="Optimization\CalcConstExprs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

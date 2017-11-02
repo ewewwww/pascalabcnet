@@ -10,7 +10,7 @@ namespace PascalABCCompiler.TreeConverter
     public partial class syntax_tree_visitor
     {
 
-
+        /*
         // TODO: Replace string key something more sufficient
         Dictionary<string, List<declaration>> typeclassDictionary = new Dictionary<string, List<declaration>>();
 
@@ -45,6 +45,6 @@ namespace PascalABCCompiler.TreeConverter
             }
 
             return true;
-        }
+        }*/
     }
 }

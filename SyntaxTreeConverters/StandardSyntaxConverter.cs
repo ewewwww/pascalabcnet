@@ -24,6 +24,17 @@ namespace PascalABCCompiler.SyntaxTreeConverters
 
             //--- Обработка синтаксически сахарных узлов
 
+            // Typeclasses
+            var collectTypeclasses = new CollectTypeclassesVisitor();
+            collectTypeclasses.visit(root);
+            var collectInstances = new CollectInstancesVisitor(collectTypeclasses.typeclassInstanceDeclarations);
+            collectInstances.visit(root);
+            var replaceContrFuncs = new CollectRestrictedFunctionsVisitor(collectInstances.typeclassInstanceDeclarations);
+            replaceContrFuncs.visit(root);
+            var removeTypeclassesAndInstances = new RemoveTypeclassesAndInstances();
+            removeTypeclassesAndInstances.visit(root);
+            //
+
             // loop
             LoopDesugarVisitor.New.ProcessNode(root);
 

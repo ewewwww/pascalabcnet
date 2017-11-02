@@ -9,7 +9,7 @@ namespace PascalABCCompiler.TreeConverter
 {
     public partial class syntax_tree_visitor
     {
-
+        /*
 
 
         Dictionary<string, procedure_definition> constraintedFuncDecl = new Dictionary<string, procedure_definition>();
@@ -41,12 +41,7 @@ namespace PascalABCCompiler.TreeConverter
 
             constraintedFuncDecl[funcName] = whereDefinition.Parent.Parent as procedure_definition;
             //(whereDefinition.Parent as function_header).
-            /*
-            foreach (var decl in typeclassDictionary[name])
-            {
-                decl.visit(this);
-            }
-            */
+
             return true;
         }
 
@@ -73,6 +68,6 @@ namespace PascalABCCompiler.TreeConverter
                     defs.list.AddRange(typeclassDictionary[constraint.name]);
                 }
             }
-        }
+        }*/
     }
 }
