@@ -1,5 +1,6 @@
 ﻿using PascalABCCompiler.SemanticTree;
 using PascalABCCompiler.SyntaxTree;
+using System.Collections.Generic;
 using PascalABCCompiler.SystemLibrary;
 using PascalABCCompiler.TreeRealization;
 using SymTable = SymbolTable;
@@ -8,6 +9,10 @@ namespace PascalABCCompiler.TreeConverter
 {
     public partial class syntax_tree_visitor
     {
+
+
+        // TODO: Replace string key something more sufficient
+        Dictionary<string, List<declaration>> typeclassDictionary = new Dictionary<string, List<declaration>>();
 
 
 
@@ -21,6 +26,7 @@ namespace PascalABCCompiler.TreeConverter
 
             var typeclassName = typeclassDeclaration.type_name as typeclass_restriction;
             
+            // Checks
             if (typeclassName.restriction_args.Count == 0)
             {
                 // TODO: AddError
@@ -30,11 +36,14 @@ namespace PascalABCCompiler.TreeConverter
             {
                 throw new NotSupportedError(get_location(typeclassName.restriction_args));
             }
-/*            var typeclassScope = SymbolTable.CreateScope(context.CurrentScope);
-            context.enter_scope(typeclassScope);
 
-            context.leave_scope();
-            */
+            typeclassDictionary[typeclassName.name] = new List<declaration>();
+            // Gather information
+            foreach (var classMembers in typeclassDefinition.body.class_def_blocks)
+            {
+                typeclassDictionary[typeclassName.name].AddRange(classMembers.members);
+            }
+
             return true;
         }
     }

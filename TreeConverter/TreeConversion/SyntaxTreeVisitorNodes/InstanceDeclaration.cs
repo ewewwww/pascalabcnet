@@ -1,5 +1,6 @@
 ﻿using PascalABCCompiler.SemanticTree;
 using PascalABCCompiler.SyntaxTree;
+using System.Collections.Generic;
 using PascalABCCompiler.SystemLibrary;
 using PascalABCCompiler.TreeRealization;
 using SymTable = SymbolTable;
@@ -8,6 +9,10 @@ namespace PascalABCCompiler.TreeConverter
 {
     public partial class syntax_tree_visitor
     {
+
+
+        
+        Dictionary<string, Dictionary<string, type_declaration>> instances = new Dictionary<string, Dictionary<string, type_declaration>>();
 
 
 
@@ -30,11 +35,15 @@ namespace PascalABCCompiler.TreeConverter
             {
                 throw new NotSupportedError(get_location(instanceName.restriction_args));
             }
-            /*            var typeclassScope = SymbolTable.CreateScope(context.CurrentScope);
-                        context.enter_scope(typeclassScope);
 
-                        context.leave_scope();
-                        */
+            if (instances.ContainsKey(instanceName.name))
+                instances[instanceName.name].Add(instanceName.restriction_args[0].ToString(), instanceDeclaration);
+            else
+            {
+                instances.Add(instanceName.name, new Dictionary<string, type_declaration>());
+                instances[instanceName.name].Add(instanceName.restriction_args[0].ToString(), instanceDeclaration);
+            }
+            
             return true;
         }
     }

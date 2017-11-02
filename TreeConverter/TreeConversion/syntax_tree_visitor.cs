@@ -11798,6 +11798,8 @@ namespace PascalABCCompiler.TreeConverter
             }
             //\lroman//
             
+            if (_procedure_definition.proc_body != null)
+                //AddConstraintDefinitions(_procedure_definition);
 
             //ssyy
             if (context.converted_template_type != null)
