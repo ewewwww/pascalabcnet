@@ -3053,12 +3053,10 @@ relop_expr
         { 
 			$$ = new bin_expr($1, $3, $2.type, @$); 
 		}
-    | is_expr tkRoundOpen tkVar identifier tkRoundClose 
+    | is_expr pattern
         {
             var isTypeCheck = $1 as typecast_node;
-            var typeDef = isTypeCheck.type_def;
-            var pattern = new type_pattern($4, typeDef, typeDef.source_context); 
-            $$ = new is_pattern_expr(isTypeCheck.expr, pattern, @$);
+            $$ = new is_pattern_expr(isTypeCheck.expr, $2, @$);
         }
     ;
     
@@ -3086,11 +3084,15 @@ pattern_out_param_list
 pattern_out_param
     : identifier tkColon type_ref
         {
-            $$ = new pattern_deconstructor_parameter($1, $3, @$);
+            $$ = new var_deconstructor_parameter($1, $3, @$);
         }
     | identifier
         {
-            $$ = new pattern_deconstructor_parameter($1, null, @$);
+            $$ = new var_deconstructor_parameter($1, null, @$);
+        }
+    | pattern 
+        {
+            $$ = new recursive_deconstructor_parameter($1, @$);
         }
     ;
     
@@ -3759,6 +3761,10 @@ keyword
 		{ $$ = $1; }
 	| tkYield	
 		{ $$ = $1; }
+    | tkMatch
+        { $$ = $1; }
+    | tkWhen
+        { $$ = $1; }
     ;
 
 reserved_keyword
