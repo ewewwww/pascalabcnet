@@ -68,6 +68,13 @@ namespace PascalABCCompiler.SyntaxTree
             to.Parent = from.Parent;
         }
 
+        public void ReplaceDescendantUnsafe(syntax_tree_node from, syntax_tree_node to, Desc d = Desc.All)
+        {
+            var ind = FindIndex(from, d);
+            this[ind] = to;
+            to.Parent = from.Parent;
+        }
+
         /// <summary>
         /// Находит последнего потомка, удовлетворяющего условию. Возвращает null, если такой не найден.
         /// </summary>
@@ -459,6 +466,8 @@ namespace PascalABCCompiler.SyntaxTree
         {
             get { return names[0]; }
         }
+
+        public static named_type_reference Boolean => new named_type_reference("boolean");
     }
 
     public partial class template_type_reference
@@ -1765,6 +1774,30 @@ namespace PascalABCCompiler.SyntaxTree
 
             return result;
         }
+
+        public override string ToString() => $"var {string.Join(", ", definitions)}";
+    }
+
+    public partial class is_pattern_expr
+    {
+        public override string ToString() => $"{left} is {right}";
+    }
+
+    public partial class deconstructor_pattern
+    {
+        public bool IsRecursive => parameters.Any(x => x is recursive_deconstructor_parameter);
+
+        public override string ToString() => $"{type}({string.Join(", ", parameters.Select(x => x.ToString()))})";
+    }
+
+    public partial class var_deconstructor_parameter
+    {
+        public override string ToString() => identifier.ToString() + (type == null ? "" : $": {type}");
+    }
+
+    public partial class recursive_deconstructor_parameter
+    {
+        public override string ToString() => pattern.ToString();
     }
 }
 
