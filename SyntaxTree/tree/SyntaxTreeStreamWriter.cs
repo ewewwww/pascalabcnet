@@ -6539,7 +6539,7 @@ namespace PascalABCCompiler.SyntaxTree
 
 		public void visit(var_deconstructor_parameter _var_deconstructor_parameter)
 		{
-			bw.Write((Int16)231);
+			bw.Write((Int16)237);
 			write_var_deconstructor_parameter(_var_deconstructor_parameter);
 		}
 
@@ -6569,7 +6569,7 @@ namespace PascalABCCompiler.SyntaxTree
 
 		public void visit(recursive_deconstructor_parameter _recursive_deconstructor_parameter)
 		{
-			bw.Write((Int16)232);
+			bw.Write((Int16)238);
 			write_recursive_deconstructor_parameter(_recursive_deconstructor_parameter);
 		}
 

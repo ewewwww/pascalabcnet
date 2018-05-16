@@ -494,9 +494,9 @@ namespace PascalABCCompiler.SyntaxTree
 					return new pattern_deconstructor_parameter();
 				case 236:
 					return new desugared_deconstruction();
-				case 231:
+				case 237:
 					return new var_deconstructor_parameter();
-				case 232:
+				case 238:
 					return new recursive_deconstructor_parameter();
 			}
 			return null;
