@@ -32,7 +32,7 @@ namespace PascalABCCompiler.SyntaxTreeConverters
                 SyntaxVisitors.TypeclassVisitors.ReplaceTypeclassVisitor.New(instancesAndRestrictedFunctions).ProcessNode(root);
             }
             root.FillParentsInAllChilds();
-            new SimplePrettyPrinterVisitor("E:/projs/out.txt").ProcessNode(root);
+            //new SimplePrettyPrinterVisitor("E:/projs/out.txt").ProcessNode(root);
             // loop
             LoopDesugarVisitor.New.ProcessNode(root);
 
@@ -54,8 +54,8 @@ namespace PascalABCCompiler.SyntaxTreeConverters
             // Patterns
             PatternsDesugaringVisitor.New.ProcessNode(root);
 
-            var printer = new SimplePrettyPrinterVisitor("G:\\Tree.txt");
-            printer.ProcessNode(root);
+            //var printer = new SimplePrettyPrinterVisitor("G:\\Tree.txt");
+            //printer.ProcessNode(root);
 
             // Всё, связанное с yield
             MarkMethodHasYieldAndCheckSomeErrorsVisitor.New.ProcessNode(root);
